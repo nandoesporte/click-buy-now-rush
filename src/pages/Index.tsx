@@ -7,8 +7,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const Index = () => {
   const isMobile = useIsMobile();
   const handleBuyNow = () => {
-    // Implement payment logic here
-    window.alert("Implementar integração com gateway de pagamento");
+    // Redirect to Kiwify payment link
+    window.location.href = 'https://pay.kiwify.com.br/o7mPjMk';
   };
 
   return (
