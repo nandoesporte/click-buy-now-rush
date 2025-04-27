@@ -2,8 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import CountdownTimer from "@/components/CountdownTimer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Index = () => {
+  const isMobile = useIsMobile();
   const handleBuyNow = () => {
     // Implement payment logic here
     window.alert("Implementar integração com gateway de pagamento");
@@ -48,7 +50,13 @@ const Index = () => {
           </div>
           <Button
             onClick={handleBuyNow}
-            className="bg-primary hover:bg-primary/90 text-white text-xl px-8 py-6 rounded-full animate-pulse-slow"
+            className={`
+              ${isMobile 
+                ? 'w-full max-w-sm py-6 text-xl rounded-full' 
+                : 'px-8 py-6 text-xl rounded-full'
+              } 
+              bg-primary hover:bg-primary/90 text-white animate-pulse-slow flex items-center justify-center gap-2
+            `}
           >
             COMPRAR AGORA
             <ArrowDown className="ml-2 h-5 w-5" />
@@ -94,7 +102,13 @@ const Index = () => {
           </p>
           <Button
             onClick={handleBuyNow}
-            className="bg-primary hover:bg-primary/90 text-white text-xl px-8 py-6 rounded-full animate-pulse-slow"
+            className={`
+              ${isMobile 
+                ? 'w-full max-w-sm py-6 text-xl rounded-full' 
+                : 'px-8 py-6 text-xl rounded-full'
+              } 
+              bg-primary hover:bg-primary/90 text-white animate-pulse-slow flex items-center justify-center gap-2
+            `}
           >
             GARANTIR MEU EBOOK AGORA
             <ArrowDown className="ml-2 h-5 w-5" />
@@ -103,14 +117,25 @@ const Index = () => {
       </div>
 
       {/* Botão Flutuante */}
-      <div className="fixed bottom-4 left-0 right-0 flex justify-center px-4 z-50">
-        <Button
-          onClick={handleBuyNow}
-          className="bg-primary hover:bg-primary/90 text-white text-lg px-6 py-4 rounded-full shadow-lg animate-pulse-slow"
-        >
-          COMPRAR AGORA - R$ 9,90
-        </Button>
-      </div>
+      {isMobile ? (
+        <div className="fixed bottom-4 left-0 right-0 flex justify-center px-4 z-50">
+          <Button
+            onClick={handleBuyNow}
+            className="w-full max-w-sm bg-primary hover:bg-primary/90 text-white text-lg py-4 rounded-full shadow-lg animate-pulse-slow"
+          >
+            COMPRAR AGORA - R$ 9,90
+          </Button>
+        </div>
+      ) : (
+        <div className="fixed bottom-4 left-0 right-0 flex justify-center px-4 z-50">
+          <Button
+            onClick={handleBuyNow}
+            className="bg-primary hover:bg-primary/90 text-white text-lg px-6 py-4 rounded-full shadow-lg animate-pulse-slow"
+          >
+            COMPRAR AGORA - R$ 9,90
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
